@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react'
+import Login from './pages/Login';
+import VerifyOTP from './pages/VetfiyOTP';
+import Register from './pages/Register';
+import LandingPage from './pages/LandingPage';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify-otp" element={<VerifyOTP />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/landing" element={<LandingPage />} />
+        {/* <Route path="*" element={<Error />} /> */}
+      </Routes>
+    </Router>
+    </ChakraProvider>
   );
 }
 
