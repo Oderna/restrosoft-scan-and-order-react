@@ -12,6 +12,7 @@ function App() {
     <ChakraProvider>
     <Router>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/register" element={<Register />} />
