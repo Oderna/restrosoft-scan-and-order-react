@@ -176,7 +176,7 @@ function LandingPage() {
     return (
         <div>
             <Stack spacing={2}>
-                <Stack spacing={2} position='fixed' bg={'white'} width='100%'>
+                <Stack spacing={2} position={"sticky"} top="0" bg={'white'} width='100%'>
                     {/* Need to use Sticky Navbar */}
                     <ChakraNavbar title='Alibaba Resturant' />
                     <TableInformation />
