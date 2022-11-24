@@ -12,7 +12,7 @@ import {
     ModalContent,
     ModalBody,
     ModalFooter,
-    ModalCloseButton,
+    // ModalCloseButton,
     useDisclosure,
   } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
@@ -39,9 +39,9 @@ function TableInformation() {
             </GridItem>
             <GridItem h="96px" colSpan={4}>
                 <Box paddingTop='0.5em' bg='#DC9F00' marginRight='.5em' borderRadius='10px' height="100%">
-                    <Stack spacing={0} align="center" className="item-centre" justifyContent={"space-around"}>
+                    <Stack spacing={0} align="center" className="item-centre">
                         <Text color='white'>Invite friends using</Text>
-                        <Flex align={'center'}>
+                        <Flex align={'center'} pt={"6px"}>
                             <Box w="133px" h="37px" bg='white' borderRadius='10px' marginRight='15px' filter={'drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));'}>
                                 <HStack justifyContent={'center'} align={'center'}>
                                     <Text color={'#FFA700'} fontStyle="itialic" fontSize={'26px'} fontWeight='300'>123456</Text>
@@ -94,7 +94,7 @@ function QRModal(){
                 <QRCode
                     size={256}
                     style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                    value={"google.com"}
+                    value="google.com"
                     viewBox={`0 0 256 256`}
                     fgColor="#DC9F00"
                 />
