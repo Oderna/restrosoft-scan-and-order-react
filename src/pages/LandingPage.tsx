@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Grid, GridItem, Box, Text, Flex, Spacer, Image, HStack, Container as ChakraContainer, Button as ChakraButton } from "@chakra-ui/react";
+import { Stack, Grid, GridItem, Box, Text, Flex, Spacer, Image, HStack, Container as ChakraContainer, Button as ChakraButton, Circle } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/icons" //https://chakra-ui.com/docs/components/icon/usage
 import { MdContentCopy, MdShoppingCart } from 'react-icons/md' //https://react-icons.github.io/react-icons/search?q=copy
 import Avatar from 'react-avatar';
@@ -163,12 +163,15 @@ function InfiniteScrollerMenu() {
 
 function CartButton() {
     return (
-        <>
-            <ChakraButton position={'fixed'} right={'0'} bottom={'0'} mr='15px' mb={'15px'} bg={'#DC9F00'} boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)' borderRadius={'5px'}>
+        <Box float={"left"} position={'fixed'} right={'0'} bottom={'0'} mr='15px'>
+            <ChakraButton bg={'#DC9F00'} boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)' borderRadius={'5px'}>
                 <Icon as={MdShoppingCart} color={'white'} mr='8px' />
                 <Text color={'white'}>Go To Cart</Text>
             </ChakraButton>
-        </>
+            <Circle size={"20px"} bg="red" position={"relative"} top="-48px" left={"-8px"}>
+                <Text color={"white"} fontSize="15px">1</Text>
+            </Circle>
+        </Box>
     )
 }
 
@@ -176,7 +179,7 @@ function LandingPage() {
     return (
         <div>
             <Stack spacing={2}>
-                <Stack spacing={2} position={"sticky"} top="0" bg={'white'} width='100%'>
+                <Stack spacing={2} position={"sticky"} top="0" bg={'white'} width='100%' zIndex={"1"}>
                     {/* Need to use Sticky Navbar */}
                     <ChakraNavbar title='Alibaba Resturant' />
                     <TableInformation />
