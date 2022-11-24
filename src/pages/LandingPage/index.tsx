@@ -1,10 +1,13 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, createContext, useContext } from "react";
+import './index.css';
 import { Stack, Grid, GridItem, Box, Text, Flex, Spacer, Image, HStack, Container as ChakraContainer, Button as ChakraButton, Circle } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/icons" //https://chakra-ui.com/docs/components/icon/usage
 import { MdContentCopy, MdShoppingCart } from 'react-icons/md' //https://react-icons.github.io/react-icons/search?q=copy
-import Avatar from 'react-avatar';
 import { Navbar as ChakraNavbar } from "../../components/common/Navbar/Navbar";
 import QRCode from "react-qr-code";
+import {ItemAddedCard, ItemCard} from "../../components/common/MenuItem";
+import { MenuItemProvider, useMenuItem } from "./MenuItemContext"
 
 import {
     Modal,
@@ -22,6 +25,49 @@ import { buttonTheme, modalTheme } from "./theme";
 export const theme = extendTheme({
   components: { ChakraButton: buttonTheme, Modal: modalTheme },
 })
+
+const menu_data = [
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 1
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    },
+    {
+        "name" : "fried rice",
+        "category": "rice",
+        "order_count": 0
+    }
+]
 
 function TableInformation() {
     return (
@@ -90,7 +136,7 @@ function QRModal(){
             <ModalOverlay />
             <ModalContent>
             <ModalBody>
-            <Box p={"15px"}  backgroundColor="white" borderRadius={"10px"}>
+            <Box p={"15px"} backgroundColor="white" borderRadius={"10px"}>
                 <QRCode
                     size={256}
                     style={{ height: "auto", maxWidth: "100%", width: "100%" }}
@@ -121,6 +167,8 @@ function ScrollerCategories() {
     return (
         // Need to remove the  scroller line 
         // POC Requirement for Carousel
+
+        // Scroller Remove :- https://stackoverflow.com/questions/60329344/hide-scrollbar-but-keep-scroll-functionality-in-react-js
         <Box h="44px" backgroundColor={'rgba(255, 167, 0, 0.1)'} boxShadow='0px 1px 9px rgba(0, 0, 0, 0.3)'>
             <HStack align={'center'} justifyContent='center' pt={'0.6em'} overflowX='scroll' overflowY={'hidden'} whiteSpace='nowrap'>
                 <Box bg={'#FFA700'} borderRadius='6px' mixBlendMode={'normal'} filter='drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.4))' px={'9px'} py={'5px'} >
@@ -143,124 +191,27 @@ function ScrollerCategories() {
     )
 }
 
-function ItemCard() {
-    return (
-        <ChakraContainer p={'0px'} h={'194px'} bg='rgba(220, 159, 0, 0.15)' border={'1px solid #ECEDED'} borderRadius={'15px'}>
-            <Stack>
-                <Image
-                    className="upper-image"
-                    objectFit='cover'
-                    src='./menu-item.svg' />
-            </Stack>
-            <Box textAlign={'center'}>
-                <Text color={'#DC9F00'}>french fries</Text>
-            </Box>
-            <Box>
-                <Flex mx={'9px'}>
-                    <Text color={'#DC9F00'}>Category:</Text>
-                    <Spacer />
-                    <Avatar name="Wim Mostmans" size="23" />
-                </Flex>
-            </Box>
-        </ChakraContainer>
-    )
-}
-
-function ItemAddedCard() {
-    return (
-        <ChakraContainer p={'0px'} h={'194px'} bg='rgba(220, 159, 0, 0.15)' border={'1px solid #ECEDED'} borderRadius={'15px'}>
-            <Stack>
-                <Image
-                    className="upper-image"
-                    objectFit='cover'
-                    src='./menu-item.svg'
-                    filter='auto' 
-                    blur='2px'
-                    brightness='40%'
-                />
-                <Box
-                    h={"40px"}
-                    w={"81px"}
-                    backgroundColor="#DC9F00"
-                >
-                </Box>
-            </Stack>
-            <Box textAlign={'center'}>
-                <Text color={'#DC9F00'}>french fries</Text>
-            </Box>
-            <Box>
-                <Flex mx={'9px'}>
-                    <Text color={'#DC9F00'}>Category:</Text>
-                    <Spacer />
-                    <Avatar name="Wim Mostmans" size="23" />
-                </Flex>
-            </Box>
-        </ChakraContainer>
-    )
-}
-
 function InfiniteScrollerMenu() {
+    const [MenuData, setMenuData] = useState(menu_data);
     return (
         //Need To Implement Infinite Scrolling
-        <Box px={'4px'}>
-            <Stack>
+        
+            <Box px={'4px'}>
+                <Stack>
                 <Grid
-                    templateColumns='repeat(2, 1fr)'
-                    gap={2}
-                >
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                    <GridItem>
-                        <ItemAddedCard />
-                    </GridItem>
-                </Grid>
-                <Grid
-                    templateColumns='repeat(2, 1fr)'
-                    gap={3}
-                >
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                </Grid>
-                <Grid
-                    templateColumns='repeat(2, 1fr)'
-                    gap={3}
-                >
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                </Grid>
-                <Grid
-                    templateColumns='repeat(2, 1fr)'
-                    gap={3}
-                >
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                </Grid>
-                <Grid
-                    templateColumns='repeat(2, 1fr)'
-                    gap={3}
-                >
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                    <GridItem>
-                        <ItemCard />
-                    </GridItem>
-                </Grid>
-            </Stack>
-        </Box>
+                        templateColumns='repeat(2, 1fr)'
+                        gap={3}
+                    >
+                    {MenuData.map((item, index) => 
+                        <GridItem>{item.order_count > 0
+                            ? <ItemAddedCard name={item.name} category={item.category} order_count={item.order_count} index={index} setData={setMenuData} data={MenuData}/>
+                            : <ItemCard name={item.name} category={item.category} />
+                        }
+                        </GridItem>
+                        )}
+                    </Grid>
+                </Stack>
+            </Box>
     )
 }
 

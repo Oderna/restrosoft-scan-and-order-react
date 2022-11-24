@@ -1,0 +1,25 @@
+.item-card-body {
+    padding: 6px !important;
+}
+
+.card-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 20px;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: capitalize;
+    color: #DC9F00;
+    padding: 2px;
+}
+
+.card {
+    border-radius: 15px;
+    border:1px solid #ECEDED;
+}
+
+.item-added-card-img {
+    filter: grayscale(80%);
+}
