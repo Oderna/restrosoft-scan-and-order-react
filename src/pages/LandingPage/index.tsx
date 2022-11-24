@@ -5,6 +5,7 @@ import { MdContentCopy, MdShoppingCart } from 'react-icons/md' //https://react-i
 import Avatar from 'react-avatar';
 import { Navbar as ChakraNavbar } from "../../components/common/Navbar/Navbar";
 import QRCode from "react-qr-code";
+import { ScrollerMenu } from "../../components/common/ScrollerMenu";
 
 import {
     Modal,
@@ -117,32 +118,6 @@ function QRModal(){
   )
 }
 
-function ScrollerCategories() {
-    return (
-        // Need to remove the  scroller line 
-        // POC Requirement for Carousel
-        <Box h="44px" backgroundColor={'rgba(255, 167, 0, 0.1)'} boxShadow='0px 1px 9px rgba(0, 0, 0, 0.3)'>
-            <HStack align={'center'} justifyContent='center' pt={'0.6em'} overflowX='scroll' overflowY={'hidden'} whiteSpace='nowrap'>
-                <Box bg={'#FFA700'} borderRadius='6px' mixBlendMode={'normal'} filter='drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.4))' px={'9px'} py={'5px'} >
-                    <Text color={'white'} fontSize={'10px'}>Starter</Text>
-                </Box>
-                <Box bg={'white'} borderRadius='6px' border={'0.5px solid #FFA700'} mixBlendMode={'normal'} px={'9px'} py={'5px'}>
-                    <Text color={'#FFA700'} fontSize={'10px'}>Breverages</Text>
-                </Box>
-                <Box bg={'white'} borderRadius='6px' border={'0.5px solid #FFA700'} mixBlendMode={'normal'} px={'9px'} py={'5px'}>
-                    <Text color={'#FFA700'} fontSize={'10px'}>Main Course</Text>
-                </Box>
-                <Box bg={'white'} borderRadius='6px' border={'0.5px solid #FFA700'} mixBlendMode={'normal'} px={'9px'} py={'5px'}>
-                    <Text color={'#FFA700'} fontSize={'10px'}>Desserts</Text>
-                </Box>
-                <Box bg={'white'} borderRadius='6px' border={'0.5px solid #FFA700'} mixBlendMode={'normal'} px={'9px'} py={'5px'}>
-                    <Text color={'#FFA700'} fontSize={'10px'}>Desserts</Text>
-                </Box>
-            </HStack>
-        </Box>
-    )
-}
-
 function ItemCard() {
     return (
         <ChakraContainer p={'0px'} h={'194px'} bg='rgba(220, 159, 0, 0.15)' border={'1px solid #ECEDED'} borderRadius={'15px'}>
@@ -253,7 +228,7 @@ function LandingPage() {
                     {/* Need to use Sticky Navbar */}
                     <ChakraNavbar title='Alibaba Resturant' />
                     <TableInformation />
-                    <ScrollerCategories />
+                    <ScrollerMenu />
                 </Stack>
                 <InfiniteScrollerMenu />
             </Stack>
