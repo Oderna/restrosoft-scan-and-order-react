@@ -96,6 +96,39 @@ function ItemCard() {
     )
 }
 
+function ItemAddedCard() {
+    return (
+        <ChakraContainer p={'0px'} h={'194px'} bg='rgba(220, 159, 0, 0.15)' border={'1px solid #ECEDED'} borderRadius={'15px'}>
+            <Stack>
+                <Image
+                    className="upper-image"
+                    objectFit='cover'
+                    src='./menu-item.svg'
+                    filter='auto' 
+                    blur='2px'
+                    brightness='40%'
+                />
+                <Box
+                    h={"40px"}
+                    w={"81px"}
+                    backgroundColor="#DC9F00"
+                >
+                </Box>
+            </Stack>
+            <Box textAlign={'center'}>
+                <Text color={'#DC9F00'}>french fries</Text>
+            </Box>
+            <Box>
+                <Flex mx={'9px'}>
+                    <Text color={'#DC9F00'}>Category:</Text>
+                    <Spacer />
+                    <Avatar name="Wim Mostmans" size="23" />
+                </Flex>
+            </Box>
+        </ChakraContainer>
+    )
+}
+
 function InfiniteScrollerMenu() {
     return (
         //Need To Implement Infinite Scrolling
@@ -109,7 +142,7 @@ function InfiniteScrollerMenu() {
                         <ItemCard />
                     </GridItem>
                     <GridItem>
-                        <ItemCard />
+                        <ItemAddedCard />
                     </GridItem>
                 </Grid>
                 <Grid
