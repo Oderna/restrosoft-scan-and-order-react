@@ -1,9 +1,27 @@
 import React from "react";
-import { Stack, Grid, GridItem, Box, Text, Flex, Spacer, Image, HStack, Container as ChakraContainer, Button as ChakraButton } from "@chakra-ui/react";
+import { Stack, Grid, GridItem, Box, Text, Flex, Spacer, Image, HStack, Container as ChakraContainer, Button as ChakraButton, Circle } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/icons" //https://chakra-ui.com/docs/components/icon/usage
 import { MdContentCopy, MdShoppingCart } from 'react-icons/md' //https://react-icons.github.io/react-icons/search?q=copy
 import Avatar from 'react-avatar';
-import { Navbar as ChakraNavbar } from "../components/common/Navbar/Navbar";
+import { Navbar as ChakraNavbar } from "../../components/common/Navbar/Navbar";
+import QRCode from "react-qr-code";
+
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
+    ModalFooter,
+    // ModalCloseButton,
+    useDisclosure,
+  } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
+import { buttonTheme, modalTheme } from "./theme";
+
+export const theme = extendTheme({
+  components: { ChakraButton: buttonTheme, Modal: modalTheme },
+})
 
 function TableInformation() {
     return (
@@ -20,10 +38,10 @@ function TableInformation() {
                 </Box>
             </GridItem>
             <GridItem h="96px" colSpan={4}>
-                <Box paddingTop='0.5em' bg='#DC9F00' marginRight='.5em' borderRadius='10px'>
+                <Box paddingTop='0.5em' bg='#DC9F00' marginRight='.5em' borderRadius='10px' height="100%">
                     <Stack spacing={0} align="center" className="item-centre">
                         <Text color='white'>Invite friends using</Text>
-                        <Flex align={'center'}>
+                        <Flex align={'center'} pt={"6px"}>
                             <Box w="133px" h="37px" bg='white' borderRadius='10px' marginRight='15px' filter={'drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));'}>
                                 <HStack justifyContent={'center'} align={'center'}>
                                     <Text color={'#FFA700'} fontStyle="itialic" fontSize={'26px'} fontWeight='300'>123456</Text>
@@ -33,18 +51,70 @@ function TableInformation() {
                             <Spacer />
                             <Text color='white'>OR</Text>
                             <Spacer />
-                            <Box>
-                                <Image
-                                    className="upper-image"
-                                    objectFit='cover'
-                                    src='./qrcode-icon.svg' />
-                            </Box>
+                            <QRModal />
                         </Flex>
                     </Stack>
                 </Box>
             </GridItem>
         </Grid>
     );
+}
+
+function QRModal(){
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+  return (
+    <ChakraProvider theme={theme}>
+        <ChakraButton
+            padding={"0px"}
+            background="transperant"
+            _hover={{
+                background:"transperant",
+            }}
+
+            // on clicking this is triggered
+            _active={{
+                bg: 'transperant',
+                transform: 'scale(0.98)',
+                borderColor: '#2477b3',
+            }} 
+            onClick={onOpen}
+        >
+                <Image
+                    className="upper-image"
+                    objectFit='cover'
+                    src='./qrcode-icon.svg' />
+        </ChakraButton>
+
+        <Modal size={"xs"} onClose={onClose} isOpen={isOpen} isCentered>
+            <ModalOverlay />
+            <ModalContent>
+            <ModalBody>
+            <Box p={"15px"}  backgroundColor="white" borderRadius={"10px"}>
+                <QRCode
+                    size={256}
+                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                    value="google.com"
+                    viewBox={`0 0 256 256`}
+                    fgColor="#DC9F00"
+                />
+            </Box>
+            </ModalBody>
+            <ModalFooter justifyContent={"center"}>
+                <Text 
+                    color="white"
+                    textAlign={"center"}
+                    fontWeight="600"
+                    fontSize={"22px"}
+                    lineHeight="26px"
+                >
+                    SCAN TO JOIN
+                </Text>
+            </ModalFooter>
+            </ModalContent>
+        </Modal>
+    </ChakraProvider>
+  )
 }
 
 function ScrollerCategories() {
@@ -163,12 +233,15 @@ function InfiniteScrollerMenu() {
 
 function CartButton() {
     return (
-        <>
-            <ChakraButton position={'fixed'} right={'0'} bottom={'0'} mr='15px' mb={'15px'} bg={'#DC9F00'} boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)' borderRadius={'5px'}>
+        <Box float={"left"} position={'fixed'} right={'0'} bottom={'0'} mr='15px'>
+            <ChakraButton bg={'#DC9F00'} boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)' borderRadius={'5px'}>
                 <Icon as={MdShoppingCart} color={'white'} mr='8px' />
                 <Text color={'white'}>Go To Cart</Text>
             </ChakraButton>
-        </>
+            <Circle size={"20px"} bg="red" position={"relative"} top="-48px" left={"-8px"}>
+                <Text color={"white"} fontSize="15px">1</Text>
+            </Circle>
+        </Box>
     )
 }
 
@@ -176,7 +249,7 @@ function LandingPage() {
     return (
         <div>
             <Stack spacing={2}>
-                <Stack spacing={2} position={"sticky"} top="0" bg={'white'} width='100%'>
+                <Stack spacing={2} position={"sticky"} top="0" bg={'white'} width='100%' zIndex={"1"}>
                     {/* Need to use Sticky Navbar */}
                     <ChakraNavbar title='Alibaba Resturant' />
                     <TableInformation />
