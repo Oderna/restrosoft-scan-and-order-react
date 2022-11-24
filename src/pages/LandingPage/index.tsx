@@ -3,7 +3,25 @@ import { Stack, Grid, GridItem, Box, Text, Flex, Spacer, Image, HStack, Containe
 import { Icon } from "@chakra-ui/icons" //https://chakra-ui.com/docs/components/icon/usage
 import { MdContentCopy, MdShoppingCart } from 'react-icons/md' //https://react-icons.github.io/react-icons/search?q=copy
 import Avatar from 'react-avatar';
-import { Navbar as ChakraNavbar } from "../components/common/Navbar/Navbar";
+import { Navbar as ChakraNavbar } from "../../components/common/Navbar/Navbar";
+import QRCode from "react-qr-code";
+
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
+    ModalFooter,
+    ModalCloseButton,
+    useDisclosure,
+  } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
+import { buttonTheme, modalTheme } from "./theme";
+
+export const theme = extendTheme({
+  components: { ChakraButton: buttonTheme, Modal: modalTheme },
+})
 
 function TableInformation() {
     return (
@@ -20,8 +38,8 @@ function TableInformation() {
                 </Box>
             </GridItem>
             <GridItem h="96px" colSpan={4}>
-                <Box paddingTop='0.5em' bg='#DC9F00' marginRight='.5em' borderRadius='10px'>
-                    <Stack spacing={0} align="center" className="item-centre">
+                <Box paddingTop='0.5em' bg='#DC9F00' marginRight='.5em' borderRadius='10px' height="100%">
+                    <Stack spacing={0} align="center" className="item-centre" justifyContent={"space-around"}>
                         <Text color='white'>Invite friends using</Text>
                         <Flex align={'center'}>
                             <Box w="133px" h="37px" bg='white' borderRadius='10px' marginRight='15px' filter={'drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));'}>
@@ -33,18 +51,70 @@ function TableInformation() {
                             <Spacer />
                             <Text color='white'>OR</Text>
                             <Spacer />
-                            <Box>
-                                <Image
-                                    className="upper-image"
-                                    objectFit='cover'
-                                    src='./qrcode-icon.svg' />
-                            </Box>
+                            <QRModal />
                         </Flex>
                     </Stack>
                 </Box>
             </GridItem>
         </Grid>
     );
+}
+
+function QRModal(){
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+  return (
+    <ChakraProvider theme={theme}>
+        <ChakraButton
+            padding={"0px"}
+            background="transperant"
+            _hover={{
+                background:"transperant",
+            }}
+
+            // on clicking this is triggered
+            _active={{
+                bg: 'transperant',
+                transform: 'scale(0.98)',
+                borderColor: '#2477b3',
+            }} 
+            onClick={onOpen}
+        >
+                <Image
+                    className="upper-image"
+                    objectFit='cover'
+                    src='./qrcode-icon.svg' />
+        </ChakraButton>
+
+        <Modal size={"xs"} onClose={onClose} isOpen={isOpen} isCentered>
+            <ModalOverlay />
+            <ModalContent>
+            <ModalBody>
+            <Box p={"15px"}  backgroundColor="white" borderRadius={"10px"}>
+                <QRCode
+                    size={256}
+                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                    value={"google.com"}
+                    viewBox={`0 0 256 256`}
+                    fgColor="#DC9F00"
+                />
+            </Box>
+            </ModalBody>
+            <ModalFooter justifyContent={"center"}>
+                <Text 
+                    color="white"
+                    textAlign={"center"}
+                    fontWeight="600"
+                    fontSize={"22px"}
+                    lineHeight="26px"
+                >
+                    SCAN TO JOIN
+                </Text>
+            </ModalFooter>
+            </ModalContent>
+        </Modal>
+    </ChakraProvider>
+  )
 }
 
 function ScrollerCategories() {
