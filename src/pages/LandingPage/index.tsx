@@ -26,49 +26,6 @@ export const theme = extendTheme({
   components: { ChakraButton: buttonTheme, Modal: modalTheme },
 })
 
-const menu_data = [
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 1
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    },
-    {
-        "name" : "fried rice",
-        "category": "rice",
-        "order_count": 0
-    }
-]
-
 function TableInformation() {
     return (
         <Grid
@@ -192,7 +149,20 @@ function ScrollerCategories() {
 }
 
 function InfiniteScrollerMenu() {
-    const [MenuData, setMenuData] = useState(menu_data);
+
+    const menuData = [
+        {
+            "name" : "fried rice",
+            "category": "rice",
+        },
+        {
+            "name" : "fried rice 1",
+            "category": "rice 1",
+        },
+    ]
+
+    const [cart, setCart] = useState([])
+
     return (
         //Need To Implement Infinite Scrolling
         
@@ -202,13 +172,11 @@ function InfiniteScrollerMenu() {
                         templateColumns='repeat(2, 1fr)'
                         gap={3}
                     >
-                    {MenuData.map((item, index) => 
-                        <GridItem>{item.order_count > 0
-                            ? <ItemAddedCard name={item.name} category={item.category} order_count={item.order_count} index={index} setData={setMenuData} data={MenuData}/>
-                            : <ItemCard name={item.name} category={item.category} />
-                        }
+                    {menuData.map((item, index) => (
+                        <GridItem>
+                            <ItemAddedCard name={item.name} category={item.category} index={index} setData={setCart} />
                         </GridItem>
-                        )}
+                    ))}
                     </Grid>
                 </Stack>
             </Box>
