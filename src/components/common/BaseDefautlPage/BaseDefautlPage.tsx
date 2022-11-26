@@ -1,11 +1,13 @@
-import { Flex as ChakraFlex, Stack as ChakraStack, Text, Image, Spacer, Button, Box } from "@chakra-ui/react";
+import { Flex as ChakraFlex, Stack as ChakraStack, Text, Image, Spacer, Button, Box, Link } from "@chakra-ui/react";
 import React from "react";
 
 
 interface PageData {
     title: string;
     description: string;
-    icon: string
+    icon: string;
+    button_text: string;
+    button_redirect_url: string;
 }
 
 function BaseDefaultPage(props: PageData): JSX.Element {
@@ -25,7 +27,9 @@ function BaseDefaultPage(props: PageData): JSX.Element {
                     <Text fontWeight={"500"} fontSize="20px" lineHeight={"23px"} color="#FCE5AB" textAlign={'center'}>{props.description}</Text>
                 </ChakraStack>
                 <Spacer />
-                <Button bgColor="#FFFFFF" color="#DC9F00" variant='outline' borderRadius='100px' shadow='0px 5px 10px rgba(0, 0, 0, 0.45);' transitionDuration="200ms">Back To Homepage</Button>
+                <Link href={props.button_redirect_url}>
+                    <Button bgColor="#FFFFFF" color="#DC9F00" variant='outline' borderRadius='100px' shadow='0px 5px 10px rgba(0, 0, 0, 0.45);' transitionDuration="200ms">{props.button_text}</Button>
+                </Link>
             </ChakraFlex>
         </Box>
     );
