@@ -2,6 +2,7 @@
 import {Box, Text, HStack} from "@chakra-ui/react";
 import React, { useState }  from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import './index.css';
 
 const getItems = () =>
   Array(20)
@@ -39,20 +40,18 @@ export function ScrollerMenu(){
     };
     return (
         // <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-        <Box h="44px" backgroundColor={'rgba(255, 167, 0, 0.1)'} boxShadow='0px 1px 9px rgba(0, 0, 0, 0.3)'>
-        <ScrollMenu
-            
-        >
+        <Box h="3em" backgroundColor={'rgba(255, 167, 0, 0.1)'} boxShadow='0px 1px 9px rgba(0, 0, 0, 0.3)'>
+          <ScrollMenu>
             {items.map(({ id }) => (
                 <Card
-                itemId={id} // NOTE: itemId is required for track items
-                title={id}
-                key={id}
-                onClick={handleClick({id})}
-                selected={isItemSelected({id})}
+                  itemId={id} // NOTE: itemId is required for track items
+                  title={id}
+                  key={id}
+                  onClick={handleClick({id})}
+                  selected={isItemSelected({id})}
                 />
             ))}
-        </ScrollMenu>
+          </ScrollMenu>
         </Box>
     )
 }
@@ -111,7 +110,7 @@ function Card(props: CardProps) {
   
     return (
         <Box bg={'#FFA700'} borderRadius='6px' mixBlendMode={'normal'} filter='drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.4))' px={'9px'} py={'5px'} >
-            <Text color={'white'} fontSize={'10px'}>{props.itemId}</Text>
+            <Text color={'white'} fontSize={'0.9rem'}>{props.itemId}</Text>
         </Box>
     //   <div
     //     onClick={() => props.onClick(visibility)}
