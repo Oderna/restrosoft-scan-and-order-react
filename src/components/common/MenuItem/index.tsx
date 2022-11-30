@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import './index.css';
 import { Stack, Box, Text, Flex, Spacer, Image, HStack, Container as ChakraContainer, Button as ChakraButton, Circle } from "@chakra-ui/react";
 import Avatar from 'react-avatar';
@@ -87,20 +87,11 @@ export function ItemCard({ category, name } : { category: string, name: string }
 //     )
 // }
 
-export function ItemAddedCard({ category, name, order_count, index, setData, data } : { category: string, name: string, order_count: number, index: number, setData: Function, data: any}) {
-    const AddItemToCart = (id: number) => {
-        for (var i = 0; i < data.length; i++) {
-            if (i === id){
-                console.log(id)
-                data[id]['order_count'] ++
-                console.log(data)
-            }
-        }
-        setData(data)
-    }
+export function ItemAddedCard({ category, name, index, setData } : { category: string, name: string, index: number, setData: Function}) {
+
+    const [orderCount, setOrderCount] = useState(0)
 
     return (
-        // <MenuItemProvider value={MenuData}>
         <BootstrapCard style={{ width: '100%', background: 'rgba(220, 159, 0, 0.15)' }}>
             <BootstrapCard.Img className="item-added-card-img" variant="top" src="./menu-item.svg"/>
             <BootstrapCard.ImgOverlay>
@@ -111,8 +102,6 @@ export function ItemAddedCard({ category, name, order_count, index, setData, dat
                 position="relative"
                 top="25px"
                 left="40px"
-                // blur='10px'
-                // brightness='40%'
             />
             </BootstrapCard.ImgOverlay>
             <BootstrapCard.Body className="item-card-body">
@@ -120,17 +109,16 @@ export function ItemAddedCard({ category, name, order_count, index, setData, dat
                 <BootstrapCard.Text>
                     <Flex
                         flexDirection={"row"}
-                        justifyContent="space-between"
+                        justifyContent={"space-between"}
                         align={"center"}
                         px="25px"
                     >
-                        <ChakraButton onClick={() => AddItemToCart(index)}><HiOutlinePlusCircle size={"20px"}/></ChakraButton>
-                        <Text fontWeight={"600"} fontSize="25px">{order_count}</Text>
-                        <HiOutlineMinusCircle size={"20px"}/>
+                        <ChakraButton onClick={() => setOrderCount(orderCount+1)}><HiOutlinePlusCircle size={"20px"} /></ChakraButton>
+                        <Text fontWeight={"600"} fontSize="25px">{orderCount}</Text>
+                        <ChakraButton onClick={() => orderCount>0 && setOrderCount(orderCount-1)}><HiOutlineMinusCircle size={"20px"}/></ChakraButton>
                     </Flex>
                 </BootstrapCard.Text>
             </BootstrapCard.Body>
-    </BootstrapCard>
-    // </MenuItemProvider>
+        </BootstrapCard>
     )
 }
