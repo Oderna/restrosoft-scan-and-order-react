@@ -1,0 +1,28 @@
+.react-horizontal-scrolling-menu--wrapper {
+    height: 3em;
+}
+
+.react-horizontal-scrolling-menu--inner-wrapper{
+    margin: 0em 0.3em;
+}
+
+.react-horizontal-scrolling-menu--separator {
+    margin: 0.4em;
+}
+
+.react-horizontal-scrolling-menu--item{
+    height: 3em;
+    padding-top: 0.55em;
+    padding-bottom: 0.55em;
+}
+
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+    display: none !important;
+}
+
+.react-horizontal-scrolling-menu--item > .css-1gu8nu6, .css-1n86x6m {
+    height: 1.9em;    
+    width: max-content;
+    display: flex;
+    align-items: center;
+}
