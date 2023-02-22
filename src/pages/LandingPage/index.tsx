@@ -19,6 +19,7 @@ import {
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
 import { buttonTheme, modalTheme } from "./theme";
+import { useTheme, Theme } from '../../context/ThemeContext';
 
 export const theme = extendTheme({
   components: { ChakraButton: buttonTheme, Modal: modalTheme },
@@ -134,7 +135,7 @@ function ItemCard() {
                 <Flex mx={'9px'}>
                     <Text color={'#DC9F00'}>Category:</Text>
                     <Spacer />
-                    <Avatar name="Wim Mostmans" size="23" />
+                    <Avatar name="Wim Mostmans" size="23" round={true} />
                 </Flex>
             </Box>
         </ChakraContainer>
@@ -221,6 +222,8 @@ function CartButton() {
 }
 
 function LandingPage() {
+    const { theme, setTheme } = useTheme();
+    console.log(theme);
     return (
         <div>
             <Stack spacing={2}>
